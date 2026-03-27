@@ -11,24 +11,33 @@ Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner".
 
 ## Links to documentation and tools
 
-##### Video 1: 
+##### Video 1: https://www.youtube.com/watch?v=I22uHf97EG4
 
-##### Other Links: 
+##### Video 2: https://www.youtube.com/watch?v=HQBtwz5EBZM
 
-##### AI GPTs used
+##### AI GPTs used: none
 
 ## Steps I followed
-1. Write the steps you followed here.  This way you can keep track of where you might have messed up if the project does not work. 
+1. Installed Arduino from their webpage: https://www.arduino.cc/en/software/
+2. Connected ESP32Cam to USB port
+3. Installed the driver for CH340 from: https://www.wch-ic.com/downloads/CH341SER_ZIP.html
+4. Uploaded espressif's github package in link in Arduino's preferences (located under files)
+5. In Arduino -> Boards Manager -> installed esp32 by espressif
+6. Selected AI THINKER ESP32-CAM from drop down box in Arduino
+7. In Arduino -> Files -> Examples -> Basics -> Blink
+8. Updated script to Output 4
+9. Changed time from 1000ms to 10000ms
+10. Uploaded script and verified success
+   
 
 ## Problems and Solutions
-Note your problems or errors here.  Google any error you may come across, and not what you tried (even if it does not work), and what was the final answer. Document your errors and solutions that worked for you.  
+At first I was unable to locate the Esp32 board even after installing the CH340 driver. This was solved by rebooting Arduino. I did not use google or any online resourse to solve this, just common trouble shooting procedure.  
 
-**Problem:** E (485) camera: Camera probe failed with error 0x105(ESP_ERR_NOT_FOUND)
-Camera init failed with error 0x105
-**Solution:**
 
 ### Example Problem
 **Problem:** Arduino code will not load on ESP32 Cam.
 **Solution:** Camera drivers were incorrect I needed to install the driver: [https://www.wch-ic.com/downloads/CH341SER_ZIP.html](https://github.com/martin-ger/esp32_nat_router).  I used file, "CH341SER.ZIP" and it worked.
 
 ## Final Report
+
+I was successful in setting up the Blink script on my ESP32-Cam without much trouble. 
