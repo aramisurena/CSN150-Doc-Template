@@ -3,6 +3,7 @@ Project: ESP32 XXXXXXXX
 
 ## Purpose
 Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner". 
+Set up ESP32 Cam Live Stream
 
 ## Equipment
 * [ESP32Cam](https://www.amazon.com/Aideepen-ESP32-CAM-Bluetooth-ESP32-CAM-MB-Arduino/dp/B08P2578LV/ref=sr_1_3?crid=4FY0ECFW0ZX7&keywords=ESP32+Cam&qid=1678902050&sprefix=esp32+cam%2Caps%2C240&sr=8-3)
@@ -15,9 +16,13 @@ Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner".
 
 ##### Video 2: https://www.youtube.com/watch?v=HQBtwz5EBZM
 
+##### Video 3: https://www.youtube.com/watch?v=4inE-n6kXSE
+
+##### Guide: https://lastminuteengineers.com/getting-started-with-esp32-cam/#esp32cam-example-2-live-video-streaming-server
+
 ##### AI GPTs used: none
 
-## Steps I followed
+## Steps I followed (Set + Blink Sketch)
 1. Installed Arduino from their webpage: https://www.arduino.cc/en/software/
 2. Connected ESP32Cam to USB port
 3. Installed the driver for CH340 from: https://www.wch-ic.com/downloads/CH341SER_ZIP.html
@@ -28,10 +33,22 @@ Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner".
 8. Updated script to Output 4
 9. Changed time from 1000ms to 10000ms
 10. Uploaded script and verified success
+
+## Steps I followed (Live Stream Cam)
+1. In Arduino -> Files -> ESP32 -> Camera -> CameraWebServer
+2. From CameraWebServer.ino -> updated my ssid and password
+3. from board_config.h -> removed // from #define CAMERA_MODEL_AI-THINKER to specify camera
+4. Commented out other camera models by adding // at the begining of their line
+5. Uploaded Sketch
+6. Accessed video streaming server by Tools -> Serial Monitor -> Setting baud rate to 115200
+7. Opened http link provided in Output
+8. CLicked "Start Stream" to verify camera is on.
    
 
 ## Problems and Solutions
 At first I was unable to locate the Esp32 board even after installing the CH340 driver. This was solved by rebooting Arduino. I did not use google or any online resourse to solve this, just common trouble shooting procedure.  
+
+No issues while setting up camera
 
 
 ### Example Problem
