@@ -4,6 +4,7 @@ Project: ESP32 XXXXXXXX
 ## Purpose
 Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner". 
 Set up ESP32 Cam Live Stream
+Set up ESP32 Access Point Web Server
 
 ## Equipment
 * [ESP32Cam](https://www.amazon.com/Aideepen-ESP32-CAM-Bluetooth-ESP32-CAM-MB-Arduino/dp/B08P2578LV/ref=sr_1_3?crid=4FY0ECFW0ZX7&keywords=ESP32+Cam&qid=1678902050&sprefix=esp32+cam%2Caps%2C240&sr=8-3)
@@ -20,7 +21,9 @@ Set up ESP32 Cam Live Stream
 
 ##### Guide: https://lastminuteengineers.com/getting-started-with-esp32-cam/#esp32cam-example-2-live-video-streaming-server
 
-##### AI GPTs used: none
+##### Guide 2: https://randomnerdtutorials.com/esp32-cam-access-point-ap-web-server/
+
+##### AI GPTs used: GPT-5.3 model
 
 ## Steps I followed (Set + Blink Sketch)
 1. Installed Arduino from their webpage: https://www.arduino.cc/en/software/
@@ -43,12 +46,58 @@ Set up ESP32 Cam Live Stream
 6. Accessed video streaming server by Tools -> Serial Monitor -> Setting baud rate to 115200
 7. Opened http link provided in Output
 8. CLicked "Start Stream" to verify camera is on.
+
+## Steps I followed (Access Point)
+1. In Arduino -> Files -> Examples -> ESP32 -> Camera -> CameraWebserver.
+2. From CameraWebServer.ino -> updated the ssid to Aramis U Accesspoint and password to 12345678Au
+3. Removed lines:
+  
+   WiFi.begin(ssid, password);
+while (WiFi.status() != WL_CONNECTED) {
+  delay(500);
+  Serial.print(".");
+}
+Serial.println("");
+Serial.println("WiFi connected");
+
+4. Added the following line under setup(): WiFi.softAP(ssid, password);
+5. Changed Serial.print(WiFi.localIP()); to Serial.print(WiFi.softAPIP());
+6. Replaced: WiFi.setSleep(false);
+
+Serial.print("WiFi connecting");
+Wifi.softAP(ssid, password);
+
+startCameraServer();
+
+Serial.print("Camera Ready! Use 'http://");
+Serial.print(WiFi.localIP());
+Serial.println("' to connect");
+
+WITH: WiFi.setSleep(false);
+
+Serial.println("Setting up Access Point...");
+WiFi.softAP(ssid, password);
+
+startCameraServer();
+
+Serial.print("Camera Ready! Connect to WiFi network: ");
+Serial.println(ssid);
+
+Serial.print("Then go to: http://");
+Serial.print(WiFi.softAPIP());
+Serial.println("/");
+7. In board_config.h -> removed // from #define CAMERA_MODEL_AI-THINKER to specify camera
+8. Verified and uploaded sketch
+9. Hard reset ESP32-CAM
+10. Connected to Aramis U Access Point via iPhone and accessed ESP32-CAM through 192.168.4.1 in Safari
    
 
 ## Problems and Solutions
 At first I was unable to locate the Esp32 board even after installing the CH340 driver. This was solved by rebooting Arduino. I did not use google or any online resourse to solve this, just common trouble shooting procedure.  
 
 No issues while setting up camera
+
+While setting up the access point I came across several hiccups. First was that I received E(44): Camera Detected not supported. This was sovled by going to board_config.h and defining the correct camera. The second was after verifiying and successfully uploading the sketch, I could not find the access point. I hard reset the ESP32-CAM and was able locate and connect.
 
 
 ### Example Problem
@@ -58,3 +107,5 @@ No issues while setting up camera
 ## Final Report
 
 I was successful in setting up the Blink script on my ESP32-Cam without much trouble. 
+I was able to successfully set up a live stream with the ESP32.
+I was able to successfully set up an Access Point using Arduino and the ESP32
